@@ -92,20 +92,6 @@ const AddEvent = () => {
             />
           </div>
 
-          <div className="form-control">
-            <select
-              name="eventFor"
-              value={eventData.eventFor}
-              onChange={handleChange}
-              required
-              className="select select-bordered w-full p-3 bg-[#243E51] text-[#89A3B6] focus:outline-none focus:ring-2 focus:ring-[#496980]"
-            >
-              <option value="" disabled>Select Audience</option>
-              <option value="student">Student</option>
-              <option value="faculty">Faculty</option>
-            </select>
-          </div>
-
           <button
             type="submit"
             className="btn w-full mt-8 bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white hover:bg-gradient-to-bl transition-all duration-300 transform hover:scale-[1.02]"

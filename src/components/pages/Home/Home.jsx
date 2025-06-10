@@ -178,7 +178,7 @@ const Home = () => {
         <img 
         src={teamGif}
         alt="Our Team" 
-          className="rounded-lg shadow-xl w-[300px] md:w-[500px] object-cover" 
+          className="rounded-lg shadow-xxl w-[300px] md:w-[500px] object-cover" 
           />
         </div>
       </div>

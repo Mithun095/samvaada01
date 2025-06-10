@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import logo from "../../../assets/video/logo.gif";
 import Loading from "../../Loading/Loading";
 
 const NavBar = () => {
   const { logOut, user, loading } = useContext(AuthContext);
+  const [imgError, setImgError] = useState(false);
 
   if (loading) {
     return <> <Loading /> </>;
@@ -16,6 +17,11 @@ const NavBar = () => {
       .then()
       .catch((error) => console.error(error));
   };
+
+  // Get first letter of displayName or "?"
+  const avatarChar = user?.displayName
+    ? user.displayName[0].toUpperCase()
+    : "?";
 
   return (
     <div>
@@ -42,8 +48,22 @@ const NavBar = () => {
                     tabIndex={-1}
                     className="btn btn-ghost btn-circle avatar"
                   >
-                    <div className="w-10 rounded-full">
-                      <img src={user.photoURL} />
+                    <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold overflow-hidden">
+                      {user.photoURL && !imgError ? (
+                        <img
+                          src={user.photoURL}
+                          alt="profile"
+                          className="w-full h-full object-cover"
+                          onError={() => setImgError(true)}
+                        />
+                      ) : (
+                        <span
+                          className="flex items-center justify-center w-10 h-10"
+                          style={{ lineHeight: "2.5rem" }}
+                        >
+                          {avatarChar}
+                        </span>
+                      )}
                     </div>
                   </label>
                   <ul
