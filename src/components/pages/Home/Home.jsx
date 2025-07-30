@@ -33,9 +33,10 @@ const Home = () => {
         const date = new Date(event.eventDate);
         const month = date.getMonth();
         const year = date.getFullYear();
-        const academicYear = month >= 6 ? 
-          `${year}-${year + 1}` : 
-          `${year - 1}-${year}`;
+        // June (5) to May (4) as academic year
+        const academicYear = month >= 5
+          ? `${year}-${year + 1}`
+          : `${year - 1}-${year}`;
         years.add(academicYear);
       });
       setAcademicYears(Array.from(years).sort().reverse());
@@ -50,15 +51,15 @@ const Home = () => {
 
   const filterEventsByYear = (academicYear, eventList = events) => {
     const [startYear] = academicYear.split('-');
-    const startDate = new Date(`${startYear}-07-01`);
-    const endDate = new Date(`${parseInt(startYear) + 1}-06-30`);
+    const startDate = new Date(`${startYear}-06-01`);
+    const endDate = new Date(`${parseInt(startYear) + 1}-05-31`);
 
     const filtered = eventList.filter(event => {
       const eventDate = new Date(event.eventDate);
       return eventDate >= startDate && eventDate <= endDate;
     });
 
-    setFilteredEvents(filtered);
+    setFilteredEvents(filtered);filterEventsByYear
     setSelectedYear(academicYear);
   };
 
@@ -84,7 +85,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-[#1A202C] text-[#89A3B6] min-h-screen">
+    <div className="bg-black text-[#89A3B6] min-h-screen">
       <Banner />
       <div className="mt-10">
         <AboutFea />

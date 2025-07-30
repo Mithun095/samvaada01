@@ -26,19 +26,20 @@ const NavBar = () => {
   return (
     <div>
       <div className="fixed top-0 left-0 w-full bg-[#243E51] bg-opacity-90 z-50 font-semibold text-[#89A3B6]">
-        <div className="navbar max-w-screen-xl mx-auto">
+        <div className="navbar max-w-screen-xl mx-auto flex items-center h-16">
           <div className="navbar-start">
             <Link className="flex items-center gap-2" to="/">
               <img className="h-8 object-contain" src={logo} alt="Logo" />
             </Link>
           </div>
-          <div className="navbar-end">
+          <div className="navbar-end flex items-center gap-2">
             {user ? (
               <>
                 {user.email === import.meta.env.VITE_ADMIN_EMAIL && (
                   <Link
                     to="/admin/add-event"
-                    className="text-white bg-gradient-to-br from-[#496980] to-[#5C7B92] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-[#38576D] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    className="text-white bg-gradient-to-br from-[#496980] to-[#5C7B92] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-[#38576D] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"
+                    style={{ marginBottom: 0 }}
                   >
                     Add Event
                   </Link>
@@ -80,7 +81,8 @@ const NavBar = () => {
                     </li>
                     <Link
                       onClick={handleLogOut}
-                      className="text-white bg-gradient-to-br from-[#496980] to-[#5C7B92] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-[#38576D] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                      className="text-white bg-gradient-to-br from-[#496980] to-[#5C7B92] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-[#38576D] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"
+                      style={{ marginBottom: 0 }}
                     >
                       Log Out
                     </Link>
@@ -91,7 +93,8 @@ const NavBar = () => {
               <>
                 <Link
                   to="/login"
-                  className="text-white bg-gradient-to-br from-[#496980] to-[#5C7B92] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-[#38576D] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                  className="text-white bg-gradient-to-br from-[#496980] to-[#5C7B92] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-[#38576D] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"
+                  style={{ marginBottom: 0 }}
                 >
                   Login
                 </Link>
