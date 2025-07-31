@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import AboutFea from "./AboutFea/AboutFea";
 import Banner from "./Banner/Banner";
-import teamGif from "../../../assets/video/team.gif";
+import MeetTheTeam from "./MeetTheTeam";
 
 
 const Home = () => {
@@ -85,7 +85,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-black text-[#89A3B6] min-h-screen">
+    <div className="bg-black text-[#89A3B6] min-h-screen pb-16">
       <Banner />
       <div className="mt-10">
         <AboutFea />
@@ -173,16 +173,10 @@ const Home = () => {
         </div>
       </div>
       
-      <div className="mt-16 mb-10">
-        <h2 className="text-4xl font-bold text-center mb-6">Meet the Team</h2>
-        <div className="flex justify-center">
-        <img 
-        src={teamGif}
-        alt="Our Team" 
-          className="rounded-lg shadow-xxl w-[300px] md:w-[500px] object-cover" 
-          />
-        </div>
-      </div>
+      <MeetTheTeam />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

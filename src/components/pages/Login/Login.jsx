@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FcGoogle } from "react-icons/fc";
-
+import { IoArrowBack } from "react-icons/io5";
 
 const Login = () => {
   const { googleLogin } = useContext(AuthContext);
@@ -25,10 +25,21 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="max-w-md w-full bg-[#1A202C] p-8 rounded-lg shadow-2xl border border-[#243E51] mt-20 mb-10">
-        <h5 className="text-2xl font-bold text-center text-[#89A3B6] mb-8">
-          Sign in to Samvaada
-        </h5>
+      <div className="relative max-w-md w-full bg-[#1A202C] p-8 rounded-lg shadow-2xl border border-[#243E51] mt-20 mb-10">
+        {/* Header with Back Arrow and Title */}
+        <div className="flex items-center justify-center mb-8 relative">
+          <button
+            onClick={() => navigate("/")}
+            className="absolute left-0 text-[#89A3B6] hover:text-white text-2xl flex items-center"
+            aria-label="Go Back"
+            style={{ top: 0 }}
+          >
+            <IoArrowBack />
+          </button>
+          <h5 className="text-2xl font-bold text-[#89A3B6] w-full text-center">
+            Sign in to Samvaada
+          </h5>
+        </div>
         <div className="mb-6 space-y-4">
           <div className="bg-[#243E51] p-4 rounded">
             <p className="text-[#89A3B6] font-semibold">Are you a student?</p>
