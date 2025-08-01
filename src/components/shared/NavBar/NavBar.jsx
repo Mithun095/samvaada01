@@ -76,7 +76,7 @@ const NavBar = () => {
                         <p className="text-2xl font-bold text-[#89A3B6]">
                           {user.displayName}
                         </p>
-                        <span className="badge">New</span>
+                        {/* <span className="badge">New</span> */}
                       </a>
                     </li>
                     <Link
