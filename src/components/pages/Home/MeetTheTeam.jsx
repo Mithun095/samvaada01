@@ -21,40 +21,40 @@ const MeetTheTeam = () => (
     ">
       {/* Large left photo */}
       <div className="col-span-2 row-span-2 md:col-span-3 md:row-span-2 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={teamGif} alt="Team" className="w-full h-full object-cover" />
+        <img src={teamGif} alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       {/* Top right 2 photos */}
       <div className="col-span-1 row-span-1 md:col-span-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={teamGif} alt="Team" className="w-full h-full object-cover" />
+        <img src={teamGif} alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       <div className="col-span-1 row-span-1 md:col-span-1 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={teamGif} alt="Team" className="w-full h-full object-cover" />
+        <img src={teamGif} alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       {/* Middle right wide photo */}
       <div className="col-span-2 row-span-1 md:col-start-4 md:col-span-3 md:row-start-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={teamGif} alt="Team" className="w-full h-full object-cover" />
+        <img src={teamGif} alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       {/* Bottom left tall photo */}
       <div className="col-span-1 row-span-2 md:col-span-2 md:row-span-2 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={teamGif} alt="Team" className="w-full h-full object-cover" />
+        <img src={teamGif} alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       {/* Bottom center 2 photos */}
       <div className="col-span-1 row-span-1 md:col-span-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={teamGif} alt="Team" className="w-full h-full object-cover" />
+        <img src={teamGif} alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       <div className="col-span-2 row-span-1 md:col-span-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={teamGif} alt="Team" className="w-full h-full object-cover" />
+        <img src={teamGif} alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       {/* Last row, rightmost empty space for text (covering both empty spaces) */}
       <div className="
         col-span-2 row-span-1 flex items-center justify-center
-        md:col-start-4 md:col-span-2 md:row-start-4 md:row-span-1
+        md:col-start-3 md:col-span-4 md:row-start-4 md:row-span-1
       ">
         <span
-          className="text-white text-3xl sm:text-4xl md:text-6xl font-extrabold mb-6 text-center w-full whitespace-nowrap"
+          className="text-white text-2xl sm:text-3xl md:text-6xl font-extrabold mb-6 text-center w-full px-1"
           style={{
             fontFamily: "'Poppins', 'Segoe UI', 'Arial', sans-serif",
-            letterSpacing: "0.03em"
+            letterSpacing: "0.05em"
           }}
         >
           SMC FOR A REASON
