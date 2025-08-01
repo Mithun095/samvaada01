@@ -1,18 +1,22 @@
 // import bgVideo from "../../../../assets/video/bg-video.mp4";
 import img from "../../../../assets/video/samvaada.png";
+import samvaadaText from "../../../../assets/video/samvaada_text.png";
 
 const Banner = () => {
   return (
-    <div className="relative w-full h-screen bg-gradient-to-b from-black via-[#181C22] to-black flex flex-col items-center justify-center pt-16 pb-16 px-6">
+    <div className="relative w-full h-screen bg-gradient-to-b from-black via-[#181C22] to-black flex flex-col items-center justify-center pt-16 pb-16 px-5">
       <img
         src={img}
         alt="Samvaada Logo"
         className="w-40 sm:w-56 md:w-72 lg:w-96 mb-8 py-2"
         draggable="false"
       />
-      <h2 className="text-5xl sm:text-6xl md:text-8xl font-extrabold mb-8">
-        SAMVAADA
-      </h2>
+      <img
+        src={samvaadaText}
+        alt="Samvaada Text"
+        className="w-64 sm:w-80 md:w-[32rem] lg:w-[40rem] mb-8"
+        draggable="false"
+      />
       <p className="text-base sm:text-lg md:text-xl text-gray-300 font-medium mb-12 text-center max-w-xs sm:max-w-md md:max-w-xl">
         Connecting minds through meaningful conversations and cultural exchange
       </p>

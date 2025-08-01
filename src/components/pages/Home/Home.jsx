@@ -87,32 +87,29 @@ const Home = () => {
   return (
     <div className="bg-black text-[#89A3B6] min-h-screen pb-16">
       <Banner />
-      <div className="mt-10">
-        <AboutFea />
-      </div>
+      
       <div className="mt-10 px-8">
-        <h2 className="text-4xl font-bold text-center mb-6">Events</h2>
+        <h2 className="text-6xl font-bold text-center mb-6">Events</h2>
         
         {/* Year filter buttons */}
         <div className="flex flex-wrap justify-center gap-4 mb-8">
-          {academicYears.map((year) => (
-            <button
-              key={year}
-              onClick={() => filterEventsByYear(year)}
-              className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                selectedYear === year
-                ? 'bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white'
-                : 'bg-[#243E51] text-[#89A3B6] hover:bg-[#2f4d63]'
-              }`}
-            >
-              {year}
-            </button>
-          ))}
-        </div>
-
+  {academicYears.map((year) => (
+    <button
+      key={year}
+      onClick={() => filterEventsByYear(year)}
+      className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+        selectedYear === year
+          ? 'bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white'
+          : 'bg-[rgba(36,62,81,0.5)] text-[#89A3B6] hover:bg-[rgba(47,77,99,0.6)]'
+      }`}
+    >
+      {year}
+    </button>
+  ))}
+</div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredEvents.map((event) => (
-            <div key={event.id} className="card bg-[#243E51] shadow-xl text-[#89A3B6] hover:scale-105 transition-transform duration-300">
+            <div key={event.id} className="card bg-[#243E51]/60 shadow-xl text-[#89A3B6] hover:scale-105 transition-transform duration-300">
               <div className="card-body">
                 <div className="flex justify-between items-start">
                   <h3 className="card-title text-2xl font-bold mb-4">{event.eventName}</h3>
@@ -172,7 +169,11 @@ const Home = () => {
           ))}
         </div>
       </div>
-      
+
+      <div className="mt-10">
+        <AboutFea />
+      </div>
+
       <MeetTheTeam />
       <br />
       <br />

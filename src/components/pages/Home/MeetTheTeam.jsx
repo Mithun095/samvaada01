@@ -3,7 +3,7 @@ import teamGif from "../../../assets/video/team.gif";
 const MeetTheTeam = () => (
   <div className="w-full flex flex-col mt-8 mb-4 px-2 md:px-8 h-[80vh] md:h-[80vh]">
     {/* Heading */}
-    <h3 className="text-center text-gray-400 text-base font-light mb-4 tracking-wide py-6">
+    <h3 className="text-center text-gray-400 text-xl font-light mb-4 tracking-wide py-6">
       Photo Gallery
     </h3>
     {/* Photo grid */}
