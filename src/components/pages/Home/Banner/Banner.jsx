@@ -8,17 +8,17 @@ const Banner = () => {
       <img
         src={img}
         alt="Samvaada Logo"
-        className="w-40 sm:w-56 md:w-72 lg:w-96 mb-8 py-2"
+        className="w-40 sm:w-56 md:w-72 lg:w-96 mt-35"
         draggable="false"
       />
       <img
         src={samvaadaText}
         alt="Samvaada Text"
-        className="w-64 sm:w-80 md:w-[32rem] lg:w-[40rem] mb-8"
+        className="w-64 sm:w-80 md:w-[32rem] lg:w-[40rem]"
         draggable="false"
       />
       <p className="text-base sm:text-lg md:text-xl text-gray-300 font-medium mb-12 text-center max-w-xs sm:max-w-md md:max-w-xl">
-        Connecting minds through meaningful conversations and cultural exchange
+        We don’t just capture moments — we preserve memories that define NMAMIT
       </p>
       <div className="flex flex-col items-center animate-bounce text-gray-400 mt-8 py-5">
         <span className="mb-2">Scroll Down</span>

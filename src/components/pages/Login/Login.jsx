@@ -56,7 +56,7 @@ const Login = () => {
             </p>
           </div>
         </div>
-        <div className="flex items-center mb-6">
+        {/* <div className="flex items-center mb-6">
           <input
             id="remember"
             type="checkbox"
@@ -65,7 +65,7 @@ const Login = () => {
           <label htmlFor="remember" className="ml-2 text-sm text-[#89A3B6]">
             Remember me
           </label>
-        </div>
+        </div> */}
         <button
           type="button"
           onClick={handleGoogleLogin}

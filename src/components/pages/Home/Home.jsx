@@ -59,7 +59,9 @@ const Home = () => {
       return eventDate >= startDate && eventDate <= endDate;
     });
 
-    setFilteredEvents(filtered);filterEventsByYear
+    const sortedFiltered = filtered.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
+setFilteredEvents(sortedFiltered);
+; filterEventsByYear
     setSelectedYear(academicYear);
   };
 
