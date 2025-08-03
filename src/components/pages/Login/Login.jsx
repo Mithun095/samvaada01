@@ -13,7 +13,6 @@ const Login = () => {
 
   const notifyGoogle = (e) => toast.success(e);
   const notifyGoogleError = (e) => toast.error(e);
-
   const handleGoogleLogin = () => {
     googleLogin()
       .then((res) => {
