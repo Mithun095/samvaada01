@@ -13,6 +13,7 @@ const Login = () => {
 
   const notifyGoogle = (e) => toast.success(e);
   const notifyGoogleError = (e) => toast.error(e);
+
   const handleGoogleLogin = () => {
     googleLogin()
       .then((res) => {
@@ -55,16 +56,7 @@ const Login = () => {
             </p>
           </div>
         </div>
-        {/* <div className="flex items-center mb-6">
-          <input
-            id="remember"
-            type="checkbox"
-            className="checkbox checkbox-sm checkbox-primary"
-          />
-          <label htmlFor="remember" className="ml-2 text-sm text-[#89A3B6]">
-            Remember me
-          </label>
-        </div> */}
+
         <button
           type="button"
           onClick={handleGoogleLogin}

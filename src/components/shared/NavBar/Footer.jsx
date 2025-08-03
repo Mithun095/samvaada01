@@ -1,7 +1,7 @@
 import React from "react";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
 import { MdEmail, MdLocationOn } from "react-icons/md";
-import logo from "../../../assets/video/samvaada.png"; // adjust this path to your logo
+import logo from "../../../assets/video/logo.gif"; // adjust this path to your logo
 
 
 const Footer = () => {
@@ -11,7 +11,7 @@ const Footer = () => {
       <div className=" mx-auto flex flex-col md:flex-row items-start justify-between gap-10">
 
         {/* Left - Logo and About */}
-        <div className="space-y-4 w-1/3">
+        <div className="space-y-4 w-full md:w-1/3">
           <img src={logo} alt="Samvaada Logo" className="h-10" />
           <p className="text-sm max-w-xs">
             Join our tribe of storytellers, creators, and memory-makers — and be part of the voice that represents NMAMIT.
@@ -25,7 +25,6 @@ const Footer = () => {
             <span className="text-sm">samvaada@nmamit.in</span>
           </div>
         </div>
-
         {/* Middle - Quote or Additional Info */}
         <div className="justify-center m-auto text-sm italic text-gray-400">
           "Framing moments that matter, and memories that last."
@@ -34,28 +33,52 @@ const Footer = () => {
         {/* Right - Socials */}
         {/* <div className="flex-1"> */}
 
-        <div className="flex w-1/3 items-end  flex-col space-y-3">
+        <div className="w-full sm:w-1/2 lg:w-1/3 flex flex-col items-start sm:items-end space-y-3">
           <div className="space-y-2">
-
             <h3 className="font-semibold mb-4 text-white">Follow Us</h3>
-            <a href="https://instagram.com/nmamit_nitte" target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition">
+
+            <a
+              href="https://instagram.com/nmamit_nitte"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center hover:text-white text-sm transition"
+            >
               <FaInstagram className="mr-2" />
               @nmamit_nitte
             </a>
-            <a href="https://instagram.com/samvaada_nmamit" target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition">
+
+            <a
+              href="https://instagram.com/samvaada_nmamit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center hover:text-white text-sm transition"
+            >
               <FaInstagram className="mr-2" />
               @samvaada_nmamit
             </a>
-            <a href="https://instagram.com/nmamighty" target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition">
+
+            <a
+              href="https://instagram.com/nmamighty"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center hover:text-white text-sm transition"
+            >
               <FaInstagram className="mr-2" />
               @nmamighty
             </a>
-            <a href="https://facebook.com/nmamit_nitte" target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition">
+
+            <a
+              href="https://facebook.com/nmamit_nitte"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center hover:text-white text-sm transition"
+            >
               <FaFacebook className="mr-2" />
-              <span >@nmamit_nitte</span>
+              @nmamit_nitte
             </a>
           </div>
         </div>
+
         {/* </div> */}
       </div>
 

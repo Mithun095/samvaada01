@@ -1,9 +1,9 @@
 import teamGif from "../../../assets/video/team.gif";
-import img1 from "../../../assets/video/img1.jpg";
+import img1 from "../../../assets/video/img1.png";
 import img2 from "../../../assets/video/img2.jpg";
 import img3 from "../../../assets/video/img3.jpg";
 import img4 from "../../../assets/video/img4.png";
-import img5 from "../../../assets/video/img5.png";
+// import img5 from "../../../assets/video/img5.png";
 import img6 from "../../../assets/video/img6.png";
 import img7 from "../../../assets/video/img7.jpg";
 
