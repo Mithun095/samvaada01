@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import logo from "../../../assets/video/logo.gif";
 import Loading from "../../Loading/Loading";
 
 const NavBar = () => {
@@ -29,7 +28,7 @@ const NavBar = () => {
         <div className="navbar max-w-screen-xl mx-auto flex items-center h-16">
           <div className="navbar-start">
             <Link className="flex items-center gap-2" to="/">
-              <img className="h-8 object-contain" src={logo} alt="Logo" />
+              <img className="h-8 object-contain" src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/logo_veymzm.png" alt="Logo" />
             </Link>
           </div>
           <div className="navbar-end flex items-center gap-2">

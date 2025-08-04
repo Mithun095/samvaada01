@@ -1,6 +1,3 @@
-
-import clg from "./../../../../assets/video/clg.png";
-
 const AboutFea = () => {
   return (
     <div className="bg-black text-[#9FB7CC] px-6 py-16 md:px-20">
@@ -40,7 +37,7 @@ const AboutFea = () => {
         {/* Right Image Column */}
         <div className="md:w-1/2 flex justify-center">
           <img
-            src={clg}
+            src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/clg_kxvcwb.png"
             alt="Samvaada team or NMAMIT campus"
             className="rounded-xl shadow-xl w-full max-w-[500px] h-auto object-cover"
             loading="eager"

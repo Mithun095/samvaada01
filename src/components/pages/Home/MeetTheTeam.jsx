@@ -1,11 +1,4 @@
-import teamGif from "../../../assets/video/team.gif";
-import img1 from "../../../assets/video/img1.png";
-import img2 from "../../../assets/video/img2.jpg";
-import img3 from "../../../assets/video/img3.jpg";
-import img4 from "../../../assets/video/img4.png";
-// import img5 from "../../../assets/video/img5.png";
-import img6 from "../../../assets/video/img6.png";
-import img7 from "../../../assets/video/img7.jpg";
+
 
 const MeetTheTeam = () => (
   <div className="w-full flex flex-col mt-8 mb-4 px-2 md:px-8 h-[80vh] md:h-[80vh]">
@@ -28,29 +21,29 @@ const MeetTheTeam = () => (
     ">
       {/* Large left photo */}
       <div className="col-span-2 row-span-2 md:col-span-3 md:row-span-2 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={img1} alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/img1_l45o2x.png" alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       {/* Top right 2 photos */}
       <div className="col-span-1 row-span-1 md:col-span-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={img2} alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/img2_tisg4l.png" alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       <div className="col-span-1 row-span-1 md:col-span-1 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={img3} alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/img3_s5vvfl.png" alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       {/* Middle right wide photo */}
       <div className="col-span-2 row-span-1 md:col-start-4 md:col-span-3 md:row-start-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={img4} alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/img4_gqz5nw.png" alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       {/* Bottom left tall photo */}
       <div className="col-span-1 row-span-2 md:col-span-2 md:row-span-2 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={teamGif} alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321030/team_a1wf0j.gif" alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       {/* Bottom center 2 photos */}
       <div className="col-span-1 row-span-1 md:col-span-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={img6} alt="Team" className="w-full h-full object-cover" loading="lazy" />
+        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/img6_pid4sj.png" alt="Team" className="w-full h-full object-cover" loading="lazy" />
       </div>
       <div className="col-span-2 row-span-1 md:col-span-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src={img7} alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321030/img7_nhcvlq.png" alt="Team" className="w-full h-full object-cover" loading="eager" />
       </div>
       {/* Last row, rightmost empty space for text (covering both empty spaces) */}
       <div className="

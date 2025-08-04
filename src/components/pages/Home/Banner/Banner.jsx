@@ -1,18 +1,15 @@
-// import bgVideo from "../../../../assets/video/bg-video.mp4";
-import img from "../../../../assets/video/samvaada.png";
-import samvaadaText from "../../../../assets/video/samvaada_text.png";
 
 const Banner = () => {
   return (
     <div className="relative w-full h-screen bg-gradient-to-b from-black via-[#181C22] to-black flex flex-col items-center justify-center pt-16 pb-16 px-5">
       <img
-        src={img}
+        src="https://res.cloudinary.com/duq64offn/image/upload/v1754321030/samvaada_lngnlm.png"
         alt="Samvaada Logo"
         className="w-40 sm:w-56 md:w-72 lg:w-96 mt-35"
         draggable="false"
       />
       <img
-        src={samvaadaText}
+        src="https://res.cloudinary.com/duq64offn/image/upload/v1754321030/samvaada_text_glq58d.png"
         alt="Samvaada Text"
         className="w-64 sm:w-80 md:w-[32rem] lg:w-[40rem]"
         draggable="false"
@@ -21,8 +18,9 @@ const Banner = () => {
         We don’t just capture moments — we preserve memories that define NMAMIT
       </p>
       <div className="flex flex-col items-center animate-bounce text-gray-400 mt-8 py-5">
+
         <span className="mb-2">Scroll Down</span>
-        <div className="text-2xl">↓</div>
+        <div className="text-2xl">↓</div> 
       </div>
     </div>
   );
