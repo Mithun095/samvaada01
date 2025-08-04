@@ -37,7 +37,7 @@ const AboutFea = () => {
         {/* Right Image Column */}
         <div className="md:w-1/2 flex justify-center">
           <img
-            src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/clg_kxvcwb.png"
+            src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXQWTndHkTeqEGVCSlJkn0RPaO4DIZ3Uoigtjb"
             alt="Samvaada team or NMAMIT campus"
             className="rounded-xl shadow-xl w-full max-w-[500px] h-auto object-cover"
             loading="eager"

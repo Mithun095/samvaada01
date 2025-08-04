@@ -21,29 +21,29 @@ const MeetTheTeam = () => (
     ">
       {/* Large left photo */}
       <div className="col-span-2 row-span-2 md:col-span-3 md:row-span-2 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/img1_l45o2x.png" alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXqQs4Zd5EetbCxrHgMTRofDqJ0i5umynQVXOL" alt="Team" className="w-full h-full object-cover" loading="eager" draggable="false"/>
       </div>
       {/* Top right 2 photos */}
       <div className="col-span-1 row-span-1 md:col-span-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/img2_tisg4l.png" alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXRMu76Icao70yfUQYEdnHecXxiNhtvJq98Tg3" alt="Team" className="w-full h-full object-cover" loading="eager" draggable="false"/>
       </div>
       <div className="col-span-1 row-span-1 md:col-span-1 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/img3_s5vvfl.png" alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXcApgYnhNBZwV6U7ejYgXJEuzo8AtyR9GLrI5" alt="Team" className="w-full h-full object-cover" loading="eager" draggable="false" />
       </div>
       {/* Middle right wide photo */}
       <div className="col-span-2 row-span-1 md:col-start-4 md:col-span-3 md:row-start-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/img4_gqz5nw.png" alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXEcBs7qU5jOozYGkZveIUb0Vfip7MHWrq8uns" alt="Team" className="w-full h-full object-cover" loading="eager" draggable="false"/>
       </div>
       {/* Bottom left tall photo */}
       <div className="col-span-1 row-span-2 md:col-span-2 md:row-span-2 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321030/team_a1wf0j.gif" alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXVdPZWU3xbgfF3Xud9NIkqnLD8Cs7ZoRj62MW" alt="Team" className="w-full h-full object-cover" loading="eager" draggable="false" />
       </div>
       {/* Bottom center 2 photos */}
       <div className="col-span-1 row-span-1 md:col-span-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/img6_pid4sj.png" alt="Team" className="w-full h-full object-cover" loading="lazy" />
+        <img src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXHy4JH5vjRBaFQcwTSbCPJr956qdtXV87pzuo" alt="Team" className="w-full h-full object-cover" loading="lazy" draggable="false" />
       </div>
       <div className="col-span-2 row-span-1 md:col-span-2 md:row-span-1 bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center">
-        <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321030/img7_nhcvlq.png" alt="Team" className="w-full h-full object-cover" loading="eager" />
+        <img src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXk0DnGwMQMWlVLnim6GOzKNaYkdD7FU9I5p4C" alt="Team" className="w-full h-full object-cover" loading="eager" draggable="false" />
       </div>
       {/* Last row, rightmost empty space for text (covering both empty spaces) */}
       <div className="

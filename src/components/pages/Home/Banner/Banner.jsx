@@ -3,13 +3,13 @@ const Banner = () => {
   return (
     <div className="relative w-full h-screen bg-gradient-to-b from-black via-[#181C22] to-black flex flex-col items-center justify-center pt-16 pb-16 px-5">
       <img
-        src="https://res.cloudinary.com/duq64offn/image/upload/v1754321030/samvaada_lngnlm.png"
+        src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXMp4m5wl0sK4AxcdVg1QO2F7fqIlheWJLbn53"
         alt="Samvaada Logo"
         className="w-40 sm:w-56 md:w-72 lg:w-96 mt-35"
         draggable="false"
       />
       <img
-        src="https://res.cloudinary.com/duq64offn/image/upload/v1754321030/samvaada_text_glq58d.png"
+        src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXYJtDCjbcBlqgmv4oVAYp86dsO2az1RMZKhE7"
         alt="Samvaada Text"
         className="w-64 sm:w-80 md:w-[32rem] lg:w-[40rem]"
         draggable="false"

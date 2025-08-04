@@ -28,7 +28,7 @@ const NavBar = () => {
         <div className="navbar max-w-screen-xl mx-auto flex items-center h-16">
           <div className="navbar-start">
             <Link className="flex items-center gap-2" to="/">
-              <img className="h-8 object-contain" src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/logo_veymzm.png" alt="Logo" />
+              <img className="h-8 object-contain" src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXPEFRVugwvAQTSePO5RWmirk6BdI0aj74xcuD" alt="Logo" />
             </Link>
           </div>
           <div className="navbar-end flex items-center gap-2">

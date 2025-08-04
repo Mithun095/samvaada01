@@ -11,7 +11,7 @@ const Footer = () => {
 
         {/* Left - Logo and About */}
         <div className="space-y-4 w-full md:w-1/3">
-          <img src="https://res.cloudinary.com/duq64offn/image/upload/v1754321029/logo_veymzm.png" alt="Samvaada Logo" className="h-10" />
+          <img src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXPEFRVugwvAQTSePO5RWmirk6BdI0aj74xcuD" alt="Samvaada Logo" className="h-10" />
           <p className="text-sm max-w-xs">
             Join our tribe of storytellers, creators, and memory-makers — and be part of the voice that represents NMAMIT.
           </p>
