@@ -23,8 +23,8 @@ const NavBar = () => {
     : "?";
 
   return (
-    <div>
-      <div className="fixed top-0 left-0 w-full bg-[#243E51] bg-opacity-90 z-50 font-semibold text-[#89A3B6]">
+    <div className="mb-16">
+      <div className="fixed top-0 left-0 w-full bg-[#243E51] bg-opacity-90 z-50 font-semibold text-[#89A3B6] ">
         <div className="navbar max-w-screen-xl mx-auto flex items-center h-16">
           <div className="navbar-start">
             <Link className="flex items-center gap-2" to="/">

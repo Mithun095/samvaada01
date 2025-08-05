@@ -9,7 +9,6 @@ import AboutFea from "./AboutFea/AboutFea";
 import Banner from "./Banner/Banner";
 import MeetTheTeam from "./MeetTheTeam";
 
-
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
@@ -40,7 +39,7 @@ const Home = () => {
         years.add(academicYear);
       });
       setAcademicYears(Array.from(years).sort().reverse());
-      
+
       // Set default year to most recent
       const mostRecentYear = Array.from(years).sort().reverse()[0];
       setSelectedYear(mostRecentYear);
@@ -60,8 +59,7 @@ const Home = () => {
     });
 
     const sortedFiltered = filtered.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
-setFilteredEvents(sortedFiltered);
-; filterEventsByYear
+    setFilteredEvents(sortedFiltered);
     setSelectedYear(academicYear);
   };
 
@@ -89,26 +87,25 @@ setFilteredEvents(sortedFiltered);
   return (
     <div className="bg-black text-[#89A3B6] min-h-screen pb-16">
       <Banner />
-      
+
       <div className="mt-10 px-8">
         <h2 className="text-6xl font-bold text-center mb-6">Events</h2>
-        
+
         {/* Year filter buttons */}
         <div className="flex flex-wrap justify-center gap-4 mb-8">
-  {academicYears.map((year) => (
-    <button
-      key={year}
-      onClick={() => filterEventsByYear(year)}
-      className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-        selectedYear === year
-          ? 'bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white'
-          : 'bg-[rgba(36,62,81,0.5)] text-[#89A3B6] hover:bg-[rgba(47,77,99,0.6)]'
-      }`}
-    >
-      {year}
-    </button>
-  ))}
-</div>
+          {academicYears.map((year) => (
+            <button
+              key={year}
+              onClick={() => filterEventsByYear(year)}
+              className={`px-4 py-2 rounded-lg transition-all duration-300 ${selectedYear === year
+                ? 'bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white'
+                : 'bg-[rgba(36,62,81,0.5)] text-[#89A3B6] hover:bg-[rgba(47,77,99,0.6)]'
+              }`}
+            >
+              {year}
+            </button>
+          ))}
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredEvents.map((event) => (
             <div key={event.id} className="card bg-[#243E51]/60 shadow-xl text-[#89A3B6] hover:scale-105 transition-transform duration-300">
@@ -117,7 +114,7 @@ setFilteredEvents(sortedFiltered);
                   <h3 className="card-title text-2xl font-bold mb-4">{event.eventName}</h3>
                   {user?.email === import.meta.env.VITE_ADMIN_EMAIL && (
                     <div className="relative">
-                      <button 
+                      <button
                         onClick={() => setShowMenu(showMenu === event.id ? null : event.id)}
                         className="btn btn-ghost btn-sm btn-circle"
                       >

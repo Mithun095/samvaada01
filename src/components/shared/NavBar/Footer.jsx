@@ -98,7 +98,7 @@ const Footer = () => {
           &{" "}
           <a
             href="https://instagram.com/srujanmpadmashali"
-            target="_blank"
+            target="_blank" 
             rel="noopener noreferrer"
             className="text-[#b0b0b0] hover:text-white underline underline-offset-2"
           >
