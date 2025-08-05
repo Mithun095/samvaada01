@@ -85,7 +85,7 @@ const MeetTheTeam = () => {
               textShadow: "20px 20px 40px 50px rgba(255, 255, 255, 0.74)",
             }}
           >
-            SMC FOR A REASON
+            SMC FOR A REASON 
           </span>
         </div>
       </div>
