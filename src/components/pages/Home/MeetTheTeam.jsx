@@ -53,7 +53,7 @@ const MeetTheTeam = () => {
         const [first, ...rest] = prev;
         return [...rest, first]; // rotate left
       });
-    }, 3000); // change every 3 seconds
+    }, 3000); //change every 3 seconds
     return () => clearInterval(interval);
   }, []);
 
