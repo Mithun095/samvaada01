@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Loading from "../../Loading/Loading";
+import logo from "../../../assets/video/logo.png"
 
 const NavBar = () => {
   const { logOut, user, loading } = useContext(AuthContext);
@@ -28,7 +29,7 @@ const NavBar = () => {
         <div className="navbar max-w-screen-xl mx-auto flex items-center h-16">
           <div className="navbar-start">
             <Link className="flex items-center gap-2" to="/">
-              <img className="h-8 object-contain" src="https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXPEFRVugwvAQTSePO5RWmirk6BdI0aj74xcuD" alt="Logo" />
+              <img className="h-8 object-contain" src={logo} alt="Logo" />
             </Link>
           </div>
           <div className="navbar-end flex items-center gap-2">
