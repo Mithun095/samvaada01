@@ -65,7 +65,6 @@ const UpdateEvent = () => {
               className="input input-bordered w-full p-3 bg-[#243E51] text-[#89A3B6] placeholder-[#89A3B6] focus:outline-none focus:ring-2 focus:ring-[#496980]"
             />
           </div>
-
           <div className="form-control">
             <textarea
               name="eventDescription"
@@ -77,7 +76,6 @@ const UpdateEvent = () => {
               className="textarea textarea-bordered w-full p-3 bg-[#243E51] text-[#89A3B6] placeholder-[#89A3B6] focus:outline-none focus:ring-2 focus:ring-[#496980] resize-none"
             />
           </div>
-
           <div className="form-control">
             <input
               type="date"
@@ -88,7 +86,6 @@ const UpdateEvent = () => {
               className="input input-bordered w-full p-3 bg-[#243E51] text-[#89A3B6] focus:outline-none focus:ring-2 focus:ring-[#496980]"
             />
           </div>
-
           <div className="form-control">
             <input
               type="url"
@@ -100,7 +97,6 @@ const UpdateEvent = () => {
               className="input input-bordered w-full p-3 bg-[#243E51] text-[#89A3B6] placeholder-[#89A3B6] focus:outline-none focus:ring-2 focus:ring-[#496980]"
             />
           </div>
-
           <button
             type="submit"
             className="btn w-full mt-8 bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white hover:bg-gradient-to-bl transition-all duration-300 transform hover:scale-[1.02]"

@@ -97,7 +97,7 @@ const Footer = () => {
           </a>{" "}
           &{" "}
           <a
-            href="https://instagram.com/srujanmpadmashali"
+            href="https://www.linkedin.com/in/srujanmpadmashali"
             target="_blank" 
             rel="noopener noreferrer"
             className="text-[#b0b0b0] hover:text-white underline underline-offset-2"
