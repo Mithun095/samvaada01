@@ -1,33 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 
-/**
- * ImageGridItem
- * - Smooth cross-fade + slight scale for a polished feel.
- * - Uses inline transition styles so timing is explicit and consistent.
- */
-const ImageGridItem = ({ className, src, alt = "Team", fadeDurationMs = 700, transformDurationMs = 900 }) => {
+const ImageGridItem = ({
+  className,
+  src,
+  alt = "Team",
+  fadeDurationMs = 1000, // smoother transition
+  transformDurationMs = 1200, // subtle zoom timing
+}) => {
   const [visibleSrc, setVisibleSrc] = useState(src);
-  const [visible, setVisible] = useState(true);
+  const [fading, setFading] = useState(false);
   const swapTimeoutRef = useRef(null);
 
   useEffect(() => {
     if (src === visibleSrc) return;
 
-    // Start fade-out
-    setVisible(false);
+    // Start smooth fade-out + zoom
+    setFading(true);
     clearTimeout(swapTimeoutRef.current);
 
-    // Wait for fade-out to finish before swapping src
+    // Just before fade completes, preload next image and swap
+    const nextImg = new Image();
+    nextImg.src = src;
+
     swapTimeoutRef.current = setTimeout(() => {
       setVisibleSrc(src);
-
-      // Let browser register src change, then fade back in
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setVisible(true);
-        });
-      });
-    }, Math.max(fadeDurationMs, 200)); // ensure at least the fade duration
+      setFading(false);
+    }, fadeDurationMs * 0.8); // swap slightly before fade ends for smoothness
 
     return () => clearTimeout(swapTimeoutRef.current);
   }, [src, visibleSrc, fadeDurationMs]);
@@ -38,28 +36,23 @@ const ImageGridItem = ({ className, src, alt = "Team", fadeDurationMs = 700, tra
     objectFit: "cover",
     userSelect: "none",
     pointerEvents: "none",
-    transition: `opacity ${fadeDurationMs}ms ease-in-out, transform ${transformDurationMs}ms cubic-bezier(.2,.9,.2,1)`,
-    opacity: visible ? 1 : 0,
-    transform: visible ? "scale(1)" : "scale(1.04)",
+    transition: `opacity ${fadeDurationMs}ms ease-in-out, transform ${transformDurationMs}ms ease-in-out`,
+    opacity: fading ? 0 : 1,
+    transform: fading ? "scale(1.05)" : "scale(1)",
     willChange: "opacity, transform",
   };
 
   return (
     <div
       className={`${className} bg-[#232323] rounded-lg overflow-hidden flex items-center justify-center`}
-      style={{ transformOrigin: "center" }}
     >
-      <img src={visibleSrc} alt={alt} loading="eager" draggable="false" style={imgStyle} />
+      <img src={visibleSrc} alt={alt} draggable="false" loading="eager" style={imgStyle} />
     </div>
   );
 };
 
-/**
- * MeetTheTeam
- * - Preloads images, then starts rotating one slot every TICK_MS.
- * - Ensures each image is used once per cycle (no repeats until all used).
- * - TICK_MS set to 3000 (3 seconds) as requested.
- */
+// ------------------ GALLERY -------------------
+
 const MeetTheTeam = () => {
   const allImages = [
     "https://gbbpj64dws.ufs.sh/f/o9wD7Q4V78YXqQs4Zd5EetbCxrHgMTRofDqJ0i5umynQVXOL",
@@ -92,9 +85,8 @@ const MeetTheTeam = () => {
   ];
 
   const numSlots = 7;
-  const TICK_MS = 3000; // 3 seconds (requested)
+  const TICK_MS = 3000;
 
-  // Helper: Fisher-Yates shuffle
   const shuffle = (arr) => {
     const a = arr.slice();
     for (let i = a.length - 1; i > 0; i--) {
@@ -104,30 +96,22 @@ const MeetTheTeam = () => {
     return a;
   };
 
-  // Preload flag
   const [preloaded, setPreloaded] = useState(false);
   const preloadErrorRef = useRef(false);
-
-  // visibleIndices: one index per slot
   const [visibleIndices, setVisibleIndices] = useState(() =>
     Array.from({ length: numSlots }, (_, i) => i % allImages.length)
   );
 
-  // queueRef: indices not yet used in current cycle
   const queueRef = useRef(
     shuffle(Array.from({ length: allImages.length }, (_, i) => i)).filter(
       (idx) => !visibleIndices.includes(idx)
     )
   );
-
-  // rotating replace position
   const replacePosRef = useRef(0);
 
-  // Preload images on mount
   useEffect(() => {
     let canceled = false;
-    const imgs = allImages.slice();
-    const promises = imgs.map(
+    const promises = allImages.map(
       (src) =>
         new Promise((resolve) => {
           const img = new Image();
@@ -137,49 +121,32 @@ const MeetTheTeam = () => {
             preloadErrorRef.current = true;
             resolve(false);
           };
-          // safety timeout so we never hang waiting for one image forever
           setTimeout(() => resolve(false), 5000);
         })
     );
+    Promise.all(promises).then(() => !canceled && setPreloaded(true));
+    return () => (canceled = true);
+  }, [allImages]);
 
-    Promise.all(promises).then(() => {
-      if (!canceled) setPreloaded(true);
-    });
-
-    return () => {
-      canceled = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Rotation tick: replace one slot per tick after preload completes
   useEffect(() => {
     if (!preloaded) return;
-
     const interval = setInterval(() => {
-      setVisibleIndices((currentVisible) => {
-        // pull next index from queue
+      setVisibleIndices((curr) => {
         let nextIdx = queueRef.current.shift();
-
-        // if queue empty, refill with indices not currently visible (shuffled)
         if (nextIdx === undefined) {
           const allIdx = Array.from({ length: allImages.length }, (_, i) => i);
-          const refill = shuffle(allIdx.filter((i) => !currentVisible.includes(i)));
+          const refill = shuffle(allIdx.filter((i) => !curr.includes(i)));
           queueRef.current = refill.length > 0 ? refill : shuffle(allIdx);
           nextIdx = queueRef.current.shift();
         }
-
         const replacePos = replacePosRef.current % numSlots;
-        const nextVisible = currentVisible.slice();
+        const nextVisible = curr.slice();
         nextVisible[replacePos] = nextIdx;
-
         replacePosRef.current = (replacePosRef.current + 1) % numSlots;
         return nextVisible;
       });
     }, TICK_MS);
-
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [preloaded]);
 
   const visible = visibleIndices.map((i) => allImages[i % allImages.length]);
@@ -198,34 +165,13 @@ const MeetTheTeam = () => {
       )}
 
       <div className="flex-1 grid grid-cols-2 grid-rows-8 gap-2 md:grid-cols-6 md:grid-rows-4 md:gap-4 h-full mx-2 md:mx-8">
-        <ImageGridItem
-          className="col-span-2 row-span-2 md:col-span-3 md:row-span-2"
-          src={visible[0]}
-        />
-        <ImageGridItem
-          className="col-span-1 row-span-1 md:col-span-2 md:row-span-1"
-          src={visible[1]}
-        />
-        <ImageGridItem
-          className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
-          src={visible[2]}
-        />
-        <ImageGridItem
-          className="col-span-2 row-span-1 md:col-start-4 md:col-span-3 md:row-start-2 md:row-span-1"
-          src={visible[3]}
-        />
-        <ImageGridItem
-          className="col-span-1 row-span-2 md:col-span-2 md:row-span-2"
-          src={visible[4]}
-        />
-        <ImageGridItem
-          className="col-span-1 row-span-1 md:col-span-2 md:row-span-1"
-          src={visible[5]}
-        />
-        <ImageGridItem
-          className="col-span-2 row-span-1 md:col-span-2 md:row-span-1"
-          src={visible[6]}
-        />
+        <ImageGridItem className="col-span-2 row-span-2 md:col-span-3 md:row-span-2" src={visible[0]} />
+        <ImageGridItem className="col-span-1 row-span-1 md:col-span-2 md:row-span-1" src={visible[1]} />
+        <ImageGridItem className="col-span-1 row-span-1 md:col-span-1 md:row-span-1" src={visible[2]} />
+        <ImageGridItem className="col-span-2 row-span-1 md:col-start-4 md:col-span-3 md:row-start-2 md:row-span-1" src={visible[3]} />
+        <ImageGridItem className="col-span-1 row-span-2 md:col-span-2 md:row-span-2" src={visible[4]} />
+        <ImageGridItem className="col-span-1 row-span-1 md:col-span-2 md:row-span-1" src={visible[5]} />
+        <ImageGridItem className="col-span-2 row-span-1 md:col-span-2 md:row-span-1" src={visible[6]} />
 
         <div className="col-span-2 row-span-1 flex items-center justify-center md:col-start-3 md:col-span-4 md:row-start-4 md:row-span-1">
           <span
@@ -233,7 +179,7 @@ const MeetTheTeam = () => {
             style={{
               fontFamily: "'Poppins', 'Segoe UI', 'Arial', sans-serif",
               letterSpacing: "0.3em",
-              textShadow: "20px 20px 40px 50px rgba(255, 255, 255, 0.74)",
+              textShadow: "0 0 30px rgba(255,255,255,0.2)",
             }}
           >
             SMC FOR A REASON
