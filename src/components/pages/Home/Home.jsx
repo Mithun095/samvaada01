@@ -38,17 +38,25 @@ const Home = () => {
           : `${year - 1}-${year}`;
         years.add(academicYear);
       });
-      setAcademicYears(Array.from(years).sort().reverse());
+      const sortedYears = Array.from(years).sort().reverse();
+      setAcademicYears(sortedYears);
 
       // Set default year to most recent
-      const mostRecentYear = Array.from(years).sort().reverse()[0];
+      const mostRecentYear = sortedYears[0] || null;
       setSelectedYear(mostRecentYear);
-      filterEventsByYear(mostRecentYear, eventsList);
+      if (mostRecentYear) filterEventsByYear(mostRecentYear, eventsList);
     };
     fetchEvents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filterEventsByYear = (academicYear, eventList = events) => {
+    if (!academicYear) {
+      setFilteredEvents([]);
+      setSelectedYear(null);
+      return;
+    }
+
     const [startYear] = academicYear.split('-');
     const startDate = new Date(`${startYear}-06-01`);
     const endDate = new Date(`${parseInt(startYear) + 1}-05-31`);
@@ -86,9 +94,13 @@ const Home = () => {
 
   return (
     <div className="bg-black text-[#89A3B6] min-h-screen pb-16">
-      <Banner />
+      {/* HOME / HERO */}
+      <section id="home">
+        <Banner />
+      </section>
 
-      <div className="mt-10 px-8">
+      {/* EVENTS */}
+      <section id="events" className="mt-10 px-8">
         <h2 className="text-6xl font-bold text-center mb-6">Events</h2>
 
         {/* Year filter buttons */}
@@ -106,6 +118,7 @@ const Home = () => {
             </button>
           ))}
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredEvents.map((event) => (
             <div key={event.id} className="card bg-[#243E51]/60 shadow-xl text-[#89A3B6] hover:scale-105 transition-transform duration-300">
@@ -167,13 +180,20 @@ const Home = () => {
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      <div className="mt-10">
-        <AboutFea />
-      </div>
+      {/* ABOUT */}
+      <section id="about" className="mt-10">
+        <div className="px-8">
+          <AboutFea />
+        </div>
+      </section>
 
-      <MeetTheTeam />
+      {/* Meet the team (kept as-is) */}
+      <section id="gallery" className="mt-10 px-8">
+        <MeetTheTeam />
+      </section>
+
       <br />
       <br />
       <br />
