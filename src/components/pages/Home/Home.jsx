@@ -93,7 +93,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-black text-[#89A3B6] min-h-screen pb-16">
+    <div className="bg-black text-[#89A3B6] min-h-screen">
       {/* HOME / HERO */}
       <section id="home">
         <Banner />

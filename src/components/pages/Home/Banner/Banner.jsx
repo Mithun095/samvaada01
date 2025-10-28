@@ -1,11 +1,14 @@
 import logo_text from "../../../../assets/video/samvaada_text.png";
 import logo from "../../../../assets/video/samvaada.png";
-
+  const handleScrollToEvents = () => {
+    const eventsSection = document.getElementById("events");
+    if (eventsSection) {
+      eventsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 const Banner = () => {
   return (
- 
     <div className="relative w-full h-screen bg-gradient-to-b from-black via-[#181C22] to-black flex flex-col items-center justify-center pt-16 pb-16 px-5">
-     
       <img
         src={logo}
         alt="Samvaada Logo"
@@ -22,12 +25,16 @@ const Banner = () => {
         We don’t just capture moments — we preserve memories that define NMAMIT
       </p>
       <div className="flex flex-col items-center animate-bounce text-gray-400 mt-5 py-5">
-
-        <span className="mb-2">Scroll Down</span>
-        <div className="text-2xl">↓</div> 
+             <button
+        onClick={handleScrollToEvents}
+        className="flex flex-col items-center animate-bounce text-gray-400 mt-5 py-5 cursor-pointer hover:text-white transition-colors duration-300"
+      >
+          <span className="mb-2">Scroll Down</span>
+          <div className="text-2xl">↓</div>
+        </button>
+        
       </div>
     </div>
-
   );
 };
 
