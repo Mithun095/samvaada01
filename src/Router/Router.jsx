@@ -6,7 +6,7 @@ import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../components/pages/ErrorPage";
 import AddEvent from "../components/pages/Admin/AddEvent";
 import UpdateEvent from "../components/pages/Admin/UpdateEvent";
-import Events from "../components/pages/events/events"; // ✅ Correct path
+import Events from "../components/pages/events/events";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/events",
-        element: <Events />, // ✅ View All Events Page
+        element: (
+          <PrivateRoute>
+            <Events />
+          </PrivateRoute>
+        ), // ✅ Protected Events Page
       },
       {
         path: "/admin/add-event",

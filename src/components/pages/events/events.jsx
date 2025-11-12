@@ -36,7 +36,7 @@ const Events = () => {
       const mostRecentYear = sortedYears[0] || null;
       setSelectedYear(mostRecentYear);
 
-      // Filter events by the most recent academic year initially
+      // Filter events for the default year
       if (mostRecentYear) {
         filterEventsByYear(mostRecentYear, eventsList);
       }
