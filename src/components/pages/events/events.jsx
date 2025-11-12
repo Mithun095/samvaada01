@@ -129,10 +129,7 @@ const Events = () => {
           </p>
         )}
       </div>
-
-      <Footer />
     </div>
   );
 };
-
 export default Events;
