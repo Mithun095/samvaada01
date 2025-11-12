@@ -16,6 +16,14 @@ const Home = () => {
   const [academicYears, setAcademicYears] = useState([]);
   const { user } = useContext(AuthContext);
   const [showMenu, setShowMenu] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  // ✅ Detect screen size (to limit events count)
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -28,14 +36,13 @@ const Home = () => {
 
       // Extract unique academic years
       const years = new Set();
-      eventsList.forEach(event => {
+      eventsList.forEach((event) => {
         const date = new Date(event.eventDate);
         const month = date.getMonth();
         const year = date.getFullYear();
         // June (5) to May (4) as academic year
-        const academicYear = month >= 5
-          ? `${year}-${year + 1}`
-          : `${year - 1}-${year}`;
+        const academicYear =
+          month >= 5 ? `${year}-${year + 1}` : `${year - 1}-${year}`;
         years.add(academicYear);
       });
       const sortedYears = Array.from(years).sort().reverse();
@@ -57,16 +64,18 @@ const Home = () => {
       return;
     }
 
-    const [startYear] = academicYear.split('-');
+    const [startYear] = academicYear.split("-");
     const startDate = new Date(`${startYear}-06-01`);
     const endDate = new Date(`${parseInt(startYear) + 1}-05-31`);
 
-    const filtered = eventList.filter(event => {
+    const filtered = eventList.filter((event) => {
       const eventDate = new Date(event.eventDate);
       return eventDate >= startDate && eventDate <= endDate;
     });
 
-    const sortedFiltered = filtered.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
+    const sortedFiltered = filtered.sort(
+      (a, b) => new Date(b.eventDate) - new Date(a.eventDate)
+    );
     setFilteredEvents(sortedFiltered);
     setSelectedYear(academicYear);
   };
@@ -74,15 +83,14 @@ const Home = () => {
   const handleDelete = async (id) => {
     try {
       await deleteDoc(doc(db, "events", id));
-      setEvents(events.filter(event => event.id !== id));
-      setFilteredEvents(filteredEvents.filter(event => event.id !== id));
+      setEvents(events.filter((event) => event.id !== id));
+      setFilteredEvents(filteredEvents.filter((event) => event.id !== id));
       toast.success("Event deleted successfully!");
     } catch (error) {
       toast.error("Error deleting event");
     }
   };
 
-  // Helper function to handle view click
   const handleViewClick = (e, link) => {
     if (!user) {
       e.preventDefault();
@@ -91,6 +99,9 @@ const Home = () => {
     }
     return true;
   };
+
+  // ✅ Limit events count (6 for desktop, 3 for mobile)
+  const displayedEvents = filteredEvents.slice(0, isMobile ? 3 : 6);
 
   return (
     <div className="bg-black text-[#89A3B6] min-h-screen">
@@ -109,9 +120,10 @@ const Home = () => {
             <button
               key={year}
               onClick={() => filterEventsByYear(year)}
-              className={`px-4 py-2 rounded-lg transition-all duration-300 ${selectedYear === year
-                ? 'bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white'
-                : 'bg-[rgba(36,62,81,0.5)] text-[#89A3B6] hover:bg-[rgba(47,77,99,0.6)]'
+              className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+                selectedYear === year
+                  ? "bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white"
+                  : "bg-[rgba(36,62,81,0.5)] text-[#89A3B6] hover:bg-[rgba(47,77,99,0.6)]"
               }`}
             >
               {year}
@@ -119,16 +131,24 @@ const Home = () => {
           ))}
         </div>
 
+        {/* Events Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredEvents.map((event) => (
-            <div key={event.id} className="card bg-[#243E51]/60 shadow-xl text-[#89A3B6] hover:scale-105 transition-transform duration-300">
+          {displayedEvents.map((event) => (
+            <div
+              key={event.id}
+              className="card bg-[#243E51]/60 shadow-xl text-[#89A3B6] hover:scale-105 transition-transform duration-300"
+            >
               <div className="card-body">
                 <div className="flex justify-between items-start">
-                  <h3 className="card-title text-2xl font-bold mb-4">{event.eventName}</h3>
+                  <h3 className="card-title text-2xl font-bold mb-4">
+                    {event.eventName}
+                  </h3>
                   {user?.email === import.meta.env.VITE_ADMIN_EMAIL && (
                     <div className="relative">
                       <button
-                        onClick={() => setShowMenu(showMenu === event.id ? null : event.id)}
+                        onClick={() =>
+                          setShowMenu(showMenu === event.id ? null : event.id)
+                        }
                         className="btn btn-ghost btn-sm btn-circle"
                       >
                         <BiDotsVerticalRounded className="text-xl" />
@@ -170,7 +190,9 @@ const Home = () => {
                     <Link
                       to="/login"
                       className="btn btn-sm bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white hover:bg-gradient-to-bl border-none"
-                      onClick={() => toast.error("Please login to view event details")}
+                      onClick={() =>
+                        toast.error("Please login to view event details")
+                      }
                     >
                       View
                     </Link>
@@ -180,6 +202,18 @@ const Home = () => {
             </div>
           ))}
         </div>
+
+        {/* View All Events Button */}
+        {filteredEvents.length > (isMobile ? 3 : 6) && (
+          <div className="flex justify-center mt-10">
+            <Link
+              to="/events"
+              className="btn bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white border-none hover:bg-gradient-to-bl px-6 py-3 rounded-lg text-lg"
+            >
+              View All Events
+            </Link>
+          </div>
+        )}
       </section>
 
       {/* ABOUT */}
@@ -189,7 +223,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Meet the team (kept as-is) */}
+      {/* MEET THE TEAM */}
       <section id="gallery" className="mt-10 px-8">
         <MeetTheTeam />
       </section>
