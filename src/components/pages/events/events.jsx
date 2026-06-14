@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 import { db } from "../../Firebase/firebase.config";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import SectionHeading from "../../shared/SectionHeading";
@@ -12,6 +13,8 @@ const Events = () => {
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [academicYears, setAcademicYears] = useState([]);
   const [selectedYear, setSelectedYear] = useState(null);
+
+  const isAdmin = user?.email === import.meta.env.VITE_ADMIN_EMAIL;
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -75,6 +78,24 @@ const Events = () => {
     setSelectedYear(academicYear);
   };
 
+  // 🗑️ Delete an event (admin only)
+  const handleDelete = async (id) => {
+    if (!isAdmin) {
+      toast.error("Unauthorized access");
+      return;
+    }
+    if (!window.confirm("Are you sure you want to delete this event?")) return;
+
+    try {
+      await deleteDoc(doc(db, "events", id));
+      setEvents((prev) => prev.filter((event) => event.id !== id));
+      setFilteredEvents((prev) => prev.filter((event) => event.id !== id));
+      toast.success("Event deleted successfully!");
+    } catch (error) {
+      toast.error("Error deleting event");
+    }
+  };
+
   return (
     <div className="relative bg-ground text-ink min-h-screen">
       {/* ambient glow */}
@@ -111,7 +132,13 @@ const Events = () => {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
               >
-                <EventCard event={event} index={i} user={user} />
+                <EventCard
+                  event={event}
+                  index={i}
+                  user={user}
+                  isAdmin={isAdmin}
+                  onDelete={handleDelete}
+                />
               </motion.div>
             ))}
           </div>
