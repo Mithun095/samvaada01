@@ -44,7 +44,7 @@ const ImageGridItem = ({
 
   return (
     <div
-      className={`${className} group relative bg-[#0d1217] rounded-sm overflow-hidden flex items-center justify-center border border-white/[0.06] transition-colors duration-500 hover:border-brand-glow/40`}
+      className={`${className} group relative min-h-0 min-w-0 bg-[#0d1217] rounded-sm overflow-hidden flex items-center justify-center border border-white/[0.06] transition-colors duration-500 hover:border-brand-glow/40`}
     >
       <img src={visibleSrc} alt={alt} draggable="false" loading="eager" style={imgStyle} />
       {/* hover corner brackets */}
@@ -174,7 +174,7 @@ const MeetTheTeam = () => {
         Mobile: natural-height grid (auto rows) so nothing overflows onto the footer.
         Desktop: fixed-height mosaic with the tagline as a full-width bottom row.
       */}
-      <div className="grid grid-cols-2 auto-rows-[34vw] gap-2 mx-2 md:mx-8 md:flex-1 md:h-full md:grid-cols-6 md:grid-rows-4 md:auto-rows-auto md:gap-4">
+      <div className="grid min-h-0 grid-cols-2 auto-rows-[34vw] gap-2 mx-2 md:mx-8 md:flex-1 md:h-full md:grid-cols-6 md:grid-rows-4 md:auto-rows-auto md:gap-4">
         <ImageGridItem className="col-span-2 row-span-2 md:col-span-3 md:row-span-2" src={visible[0]} />
         <ImageGridItem className="col-span-1 row-span-1 md:col-span-2 md:row-span-1" src={visible[1]} />
         <ImageGridItem className="col-span-1 row-span-1 md:col-span-1 md:row-span-1" src={visible[2]} />

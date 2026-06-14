@@ -78,15 +78,13 @@ const EventCard = ({ event, user, isAdmin = false, onDelete }) => {
         {/* action */}
         <div className="mt-6 pt-5 border-t border-white/[0.06]">
           {user ? (
-            <a
-              href={event.eventDriveLink}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to={`/events/${event.id}/gallery`}
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-glow hover:text-white transition-colors"
             >
               View Photos
               <FiArrowUpRight className="text-base transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+            </Link>
           ) : (
             <Link
               to="/login"

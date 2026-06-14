@@ -68,7 +68,7 @@ const Footer = () => {
           </div>
 
           {/* Explore */}
-          <nav className="lg:col-span-3">
+          <nav className="lg:col-span-3 text-left">
             <h4 className="cam-label !text-[0.62rem] text-brand-glow/90 mb-5">Explore</h4>
             <ul className="space-y-3">
               {links.map((l) => (
@@ -86,7 +86,7 @@ const Footer = () => {
           </nav>
 
           {/* Follow */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4 text-left">
             <h4 className="cam-label !text-[0.62rem] text-brand-glow/90 mb-5">Follow Us</h4>
             <ul className="space-y-3">
               {socials.map((s, i) => (
