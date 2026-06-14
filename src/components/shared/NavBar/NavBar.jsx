@@ -66,47 +66,54 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="mb-16">
+    <>
       {/* Show loading overlay if loading */}
       {loading && <Loading />}
 
-      <div className="fixed top-0 left-0 w-full bg-[#243E51] bg-opacity-90 z-50 font-semibold text-[#89A3B6]">
-        <div className="navbar max-w-screen-xl mx-auto flex items-center h-16 px-4 md:px-6">
-          <div className="navbar-start flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-2">
-              <img className="h-8 object-contain" src={logo} alt="Logo" />
-            </Link>
-          </div>
+      {/* Spacer keeps page content below the fixed bar — prevents overlap at any zoom */}
+      <div className="h-[var(--nav-h)]" aria-hidden="true" />
+
+      <header className="fixed top-0 left-0 w-full z-[70] h-[var(--nav-h)] bg-ground/85 backdrop-blur-xl border-b border-white/[0.06]">
+        {/* thin lens-glow accent under the bar */}
+        <div className="pointer-events-none absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-brand-glow/40 to-transparent" />
+
+        <div className="max-w-screen-xl mx-auto flex items-center h-full px-4 md:px-6">
+          {/* Brand */}
+          <Link to="/" className="flex items-center shrink-0">
+            <img
+              className="h-8 object-contain"
+              src={logo}
+              alt="Samvaada"
+            />
+          </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex navbar-center flex-1 justify-end items-center">
-            <div className="flex items-center gap-6 mr-4">
+          <nav className="hidden md:flex flex-1 justify-end items-center gap-8">
+            <div className="flex items-center gap-8">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className="text-sm text-[#89A3B6] hover:text-white focus:outline-none"
+                  className="group relative text-sm font-medium text-ink-dim hover:text-ink transition-colors duration-300"
                 >
                   {item.label}
+                  <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-brand-glow transition-all duration-300 group-hover:w-full" />
                 </button>
               ))}
             </div>
 
             {/* Login / Avatar / Admin */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3 pl-2 border-l border-white/10">
               {user ? (
                 <>
                   {user.email === import.meta.env.VITE_ADMIN_EMAIL && (
-                    <Link
-                      to="/admin/add-event"
-                      className="text-white bg-gradient-to-br from-[#496980] to-[#5C7B92] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-[#38576D] font-medium rounded-lg text-sm px-4 py-2 text-center mr-2"
-                    >
-                      Add Event
+                    <Link to="/admin/add-event" className="btn-cine">
+                      + Add Event
                     </Link>
                   )}
                   <div className="dropdown dropdown-end">
-                    <label tabIndex={-1} className="btn btn-ghost btn-circle avatar">
-                      <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold overflow-hidden">
+                    <label tabIndex={0} className="cursor-pointer">
+                      <div className="w-9 h-9 rounded-full ring-1 ring-brand-glow/40 bg-brand-700 flex items-center justify-center text-ink text-sm font-bold overflow-hidden hover:ring-brand-glow transition">
                         {user.photoURL && !imgError ? (
                           <img
                             src={user.photoURL}
@@ -115,23 +122,24 @@ const NavBar = () => {
                             onError={() => setImgError(true)}
                           />
                         ) : (
-                          <span className="flex items-center justify-center w-10 h-10" style={{ lineHeight: "2.5rem" }}>
-                            {avatarChar}
-                          </span>
+                          <span>{avatarChar}</span>
                         )}
                       </div>
                     </label>
-                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-[#29465B] rounded-box w-60">
-                      <li>
-                        <div className="justify-between mb-5 items-center">
-                          <p className="text-2xl font-bold text-[#89A3B6]">{user.displayName}</p>
+                    <ul
+                      tabIndex={0}
+                      className="mt-3 z-[1] p-3 shadow-card menu menu-sm dropdown-content bg-ground-card border border-white/10 rounded-md w-60"
+                    >
+                      <li className="mb-2 pointer-events-none">
+                        <div className="block">
+                          <p className="cam-label !text-[0.5rem] text-ink-faint">Signed in as</p>
+                          <p className="font-display text-lg font-bold text-ink">
+                            {user.displayName}
+                          </p>
                         </div>
                       </li>
                       <li>
-                        <button
-                          onClick={handleLogOut}
-                          className="w-full text-left text-white bg-gradient-to-br from-[#496980] to-[#5C7B92] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-[#38576D] font-medium rounded-lg text-sm px-3 py-2"
-                        >
+                        <button onClick={handleLogOut} className="btn-cine w-full justify-center">
                           Log Out
                         </button>
                       </li>
@@ -139,28 +147,25 @@ const NavBar = () => {
                   </div>
                 </>
               ) : (
-                <Link
-                  to="/login"
-                  className="text-white bg-gradient-to-br from-[#496980] to-[#5C7B92] hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-[#38576D] font-medium rounded-lg text-sm px-4 py-2 text-center mr-2"
-                >
+                <Link to="/login" className="btn-cine">
                   Login
                 </Link>
               )}
             </div>
-          </div>
+          </nav>
 
           {/* Mobile menu button */}
           <div className="md:hidden ml-auto flex items-center">
             <button
               onClick={() => setMobileOpen((s) => !s)}
               aria-label="Toggle menu"
-              className="p-2 rounded-md focus:outline-none"
+              className="p-2 rounded-md text-ink-dim hover:text-ink focus:outline-none"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {mobileOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M6 18L18 6M6 6l12 12" />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M4 7h16M4 12h16M4 17h16" />
                 )}
               </svg>
             </button>
@@ -169,28 +174,28 @@ const NavBar = () => {
 
         {/* Mobile menu panel */}
         {mobileOpen && (
-          <div className="md:hidden border-t bg-white/5 backdrop-blur-sm">
-            <div className="max-w-screen-xl mx-auto px-4 py-3 flex flex-col space-y-2">
+          <div className="md:hidden bg-ground/95 backdrop-blur-xl border-t border-white/10">
+            <div className="max-w-screen-xl mx-auto px-4 py-4 flex flex-col space-y-1">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className="text-left w-full px-2 py-2 text-sm font-medium rounded-md focus:outline-none text-[#89A3B6] hover:bg-[rgba(36,62,81,0.6)]"
+                  className="text-left w-full px-2 py-3 text-sm font-medium text-ink-dim hover:text-ink hover:bg-white/[0.04] rounded-md transition"
                 >
                   {item.label}
                 </button>
               ))}
 
-              <div className="pt-2">
+              <div className="pt-3 mt-2 border-t border-white/10">
                 {user ? (
                   <>
                     {user.email === import.meta.env.VITE_ADMIN_EMAIL && (
                       <Link
                         to="/admin/add-event"
-                        className="block w-full text-center px-4 py-2 rounded-md mb-2 text-white bg-gradient-to-br from-[#496980] to-[#5C7B92]"
+                        className="btn-cine w-full justify-center mb-2"
                         onClick={() => setMobileOpen(false)}
                       >
-                        Add Event
+                        + Add Event
                       </Link>
                     )}
                     <button
@@ -198,7 +203,7 @@ const NavBar = () => {
                         await handleLogOut();
                         setMobileOpen(false);
                       }}
-                      className="block w-full text-center px-4 py-2 rounded-md text-white bg-gradient-to-br from-[#496980] to-[#5C7B92]"
+                      className="btn-cine w-full justify-center"
                     >
                       Log Out
                     </button>
@@ -206,7 +211,7 @@ const NavBar = () => {
                 ) : (
                   <Link
                     to="/login"
-                    className="block w-full text-center px-4 py-2 rounded-md text-white bg-gradient-to-br from-[#496980] to-[#5C7B92]"
+                    className="btn-cine w-full justify-center"
                     onClick={() => setMobileOpen(false)}
                   >
                     Login
@@ -216,8 +221,8 @@ const NavBar = () => {
             </div>
           </div>
         )}
-      </div>
-    </div>
+      </header>
+    </>
   );
 };
 

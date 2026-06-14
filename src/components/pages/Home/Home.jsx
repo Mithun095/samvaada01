@@ -1,13 +1,15 @@
 import { useEffect, useState, useContext } from "react";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { motion } from "framer-motion";
 import { db } from "../../Firebase/firebase.config";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import { BiDotsVerticalRounded } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import AboutFea from "./AboutFea/AboutFea";
 import Banner from "./Banner/Banner";
 import MeetTheTeam from "./MeetTheTeam";
+import SectionHeading from "../../shared/SectionHeading";
+import EventCard from "../../shared/EventCard";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
@@ -15,7 +17,6 @@ const Home = () => {
   const [selectedYear, setSelectedYear] = useState(null);
   const [academicYears, setAcademicYears] = useState([]);
   const { user } = useContext(AuthContext);
-  const [showMenu, setShowMenu] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   // ✅ Detect screen size (to limit events count)
@@ -91,39 +92,32 @@ const Home = () => {
     }
   };
 
-  const handleViewClick = (e, link) => {
-    if (!user) {
-      e.preventDefault();
-      toast.error("Please login to view event details");
-      return false;
-    }
-    return true;
-  };
+  const isAdmin = user?.email === import.meta.env.VITE_ADMIN_EMAIL;
 
   // ✅ Limit events count (6 for desktop, 3 for mobile)
   const displayedEvents = filteredEvents.slice(0, isMobile ? 3 : 6);
 
   return (
-    <div className="bg-black text-[#89A3B6] min-h-screen">
+    <div className="bg-ground text-ink">
       {/* HOME / HERO */}
       <section id="home">
         <Banner />
       </section>
 
       {/* EVENTS */}
-      <section id="events" className="mt-10 px-8">
-        <h2 className="text-6xl font-bold text-center mb-6">Events</h2>
+      <section id="events" className="relative max-w-screen-xl mx-auto pt-20 pb-12 px-6 md:px-8">
+        <SectionHeading kicker="Captured Moments" title="Events" />
 
-        {/* Year filter buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        {/* Year filter */}
+        <div className="flex flex-wrap justify-center gap-2 mt-8 mb-10">
           {academicYears.map((year) => (
             <button
               key={year}
               onClick={() => filterEventsByYear(year)}
-              className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+              className={`text-sm font-medium px-4 py-1.5 rounded-full border transition-all duration-300 ${
                 selectedYear === year
-                  ? "bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white"
-                  : "bg-[rgba(36,62,81,0.5)] text-[#89A3B6] hover:bg-[rgba(47,77,99,0.6)]"
+                  ? "border-brand-glow/50 bg-brand-700/40 text-ink"
+                  : "border-white/10 text-ink-dim hover:border-brand-glow/30 hover:text-ink"
               }`}
             >
               {year}
@@ -132,105 +126,51 @@ const Home = () => {
         </div>
 
         {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayedEvents.map((event) => (
-            <div
-              key={event.id}
-              className="card bg-[#243E51]/60 shadow-xl text-[#89A3B6] hover:scale-105 transition-transform duration-300"
-            >
-              <div className="card-body">
-                <div className="flex justify-between items-start">
-                  <h3 className="card-title text-2xl font-bold mb-4">
-                    {event.eventName}
-                  </h3>
-                  {user?.email === import.meta.env.VITE_ADMIN_EMAIL && (
-                    <div className="relative">
-                      <button
-                        onClick={() =>
-                          setShowMenu(showMenu === event.id ? null : event.id)
-                        }
-                        className="btn btn-ghost btn-sm btn-circle"
-                      >
-                        <BiDotsVerticalRounded className="text-xl" />
-                      </button>
-                      {showMenu === event.id && (
-                        <div className="absolute right-0 mt-2 w-48 bg-[#1A202C] rounded-md shadow-lg z-50">
-                          <div className="py-1">
-                            <Link
-                              to={`/admin/update-event/${event.id}`}
-                              className="block px-4 py-2 text-sm hover:bg-[#243E51]"
-                            >
-                              Update Event
-                            </Link>
-                            <button
-                              onClick={() => handleDelete(event.id)}
-                              className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-[#243E51]"
-                            >
-                              Delete Event
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-                <p className="mb-4">{event.eventDescription}</p>
-                <div className="flex justify-between items-center">
-                  <p className="text-sm text-gray-400">{event.eventDate}</p>
-                  {user ? (
-                    <a
-                      href={event.eventDriveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-sm bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white hover:bg-gradient-to-bl border-none"
-                    >
-                      View
-                    </a>
-                  ) : (
-                    <Link
-                      to="/login"
-                      className="btn btn-sm bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white hover:bg-gradient-to-bl border-none"
-                      onClick={() =>
-                        toast.error("Please login to view event details")
-                      }
-                    >
-                      View
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        {displayedEvents.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {displayedEvents.map((event, i) => (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: (i % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <EventCard
+                  event={event}
+                  index={i}
+                  user={user}
+                  isAdmin={isAdmin}
+                  onDelete={handleDelete}
+                />
+              </motion.div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-ink-faint py-16">
+            No events found for {selectedYear || "this year"}.
+          </p>
+        )}
 
         {/* View All Events Button */}
         {filteredEvents.length > (isMobile ? 3 : 6) && (
-          <div className="flex justify-center mt-10">
-            <Link
-              to="/events"
-              className="btn bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white border-none hover:bg-gradient-to-bl px-6 py-3 rounded-lg text-lg"
-            >
-              View All Events
+          <div className="flex justify-center mt-12">
+            <Link to="/events" className="btn-cine">
+              View all events
             </Link>
           </div>
         )}
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="mt-10">
-        <div className="px-8">
-          <AboutFea />
-        </div>
+      <section id="about" className="mt-12">
+        <AboutFea />
       </section>
 
-      {/* MEET THE TEAM */}
-      <section id="gallery" className="mt-10 px-8">
+      {/* GALLERY */}
+      <section id="gallery" className="mt-12 px-4 md:px-8 pb-10">
         <MeetTheTeam />
       </section>
-
-      <br />
-      <br />
-      <br />
     </div>
   );
 };

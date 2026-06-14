@@ -1,12 +1,22 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/shared/NavBar/NavBar";
 import Footer from "../components/shared/NavBar/Footer";
-import ScrollToTop from "../components/shared/NavBar/ScrollToTop"; 
+import ScrollToTop from "../components/shared/NavBar/ScrollToTop";
 
 const Root = () => {
   return (
-    <div className="bg-[#1A202C] text-[#89A3B6] min-h-screen">
-      <ScrollToTop /> {/* ✅ Add this line here */}
+    <div className="relative bg-ground text-ink min-h-screen font-body selection:text-white">
+      {/* Film-grain + vignette atmosphere (sits above content, ignores pointer) */}
+      <div className="film-grain" aria-hidden="true" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-[55]"
+        style={{
+          boxShadow: "inset 0 0 200px 40px rgba(0,0,0,0.85)",
+        }}
+      />
+
+      <ScrollToTop />
       <NavBar />
       <div>
         <Outlet />
