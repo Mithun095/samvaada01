@@ -7,6 +7,7 @@ import ErrorPage from "../components/pages/ErrorPage";
 import AddEvent from "../components/pages/Admin/AddEvent";
 import UpdateEvent from "../components/pages/Admin/UpdateEvent";
 import Events from "../components/pages/events/events";
+import Gallery from "../components/pages/Gallery/Gallery";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
             <Events />
           </PrivateRoute>
         ), // ✅ Protected Events Page
+      },
+      {
+        path: "/events/:id/gallery",
+        element: (
+          <PrivateRoute>
+            <Gallery />
+          </PrivateRoute>
+        ), // ✅ In-site photo gallery (Drive-backed)
       },
       {
         path: "/admin/add-event",
