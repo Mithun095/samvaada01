@@ -1,3 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --nav-h: 4rem;
+  --ground: #06090c;
+  --ground-soft: #0b1116;
+  --ink: #c4d4e1;
+  --ink-dim: #89a3b6;
+  --brand-500: #496980;
+  --brand-glow: #86aecb;
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* keep anchored sections clear of the fixed navbar */
+    scroll-padding-top: var(--nav-h);
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--ground);
+    color: var(--ink);
+    font-family: "Manrope", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(134, 174, 203, 0.28);
+    color: #fff;
+  }
+
+  /* Custom darkroom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #06090c;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(#2f4d63, #1a2c39);
+    border-radius: 999px;
+    border: 2px solid #06090c;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(#496980, #243e51);
+  }
+}
+
+@layer components {
+  /* ---- Small refined kicker / label ---- */
+  .cam-label {
+    font-family: "Manrope", system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--ink-dim);
+  }
+
+  /* ---- Gradient ink for headlines ---- */
+  .ink-gradient {
+    background: linear-gradient(180deg, #eef4f9 0%, #b8cedd 60%, #89a3b6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---- Primary button — clean, soft ---- */
+  .btn-cine {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    font-family: "Manrope", system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: #eef4f9;
+    padding: 0.6rem 1.3rem;
+    border: 1px solid rgba(134, 174, 203, 0.28);
+    background: rgba(73, 105, 128, 0.18);
+    border-radius: 8px;
+    transition: all 0.28s ease;
+  }
+  .btn-cine:hover {
+    border-color: rgba(134, 174, 203, 0.6);
+    background: rgba(73, 105, 128, 0.32);
+    transform: translateY(-1px);
+  }
+
+  /* ---- Subtle ghost / secondary button ---- */
+  .btn-ghost-cine {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-family: "Manrope", system-ui, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-dim);
+    padding: 0.55rem 1rem;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+  }
+  .btn-ghost-cine:hover {
+    color: #eef4f9;
+  }
+}
+
+@layer utilities {
+  /* ---- Film grain overlay ---- */
+  .film-grain {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}

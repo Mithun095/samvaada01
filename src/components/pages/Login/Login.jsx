@@ -24,35 +24,41 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="relative max-w-md w-full bg-[#1A202C] p-8 rounded-lg shadow-2xl border border-[#243E51] mt-20 mb-10">
-        {/* Header with Back Arrow and Title */}
-        <div className="flex items-center justify-center mb-8 relative">
-          <button
-            onClick={() => navigate("/")}
-            className="absolute left-0 text-[#89A3B6] hover:text-white text-2xl flex items-center"
-            aria-label="Go Back"
-            style={{ top: 0 }}
-          >
-            <IoArrowBack />
-          </button>
-          <h5 className="text-2xl font-bold text-[#89A3B6] w-full text-center">
-            Sign in to Samvaada
-          </h5>
-        </div>
-        <div className="mb-6 space-y-4">
-          <div className="bg-[#243E51] p-4 rounded">
-            <p className="text-[#89A3B6] font-semibold">Are you a student?</p>
-            <p className="text-[#89A3B6] text-sm">
-              Login with your college account ending with{" "}
-              <span className="font-mono">@nmamit.in</span>
+    <div className="relative min-h-[calc(100svh-var(--nav-h))] flex items-center justify-center px-4 py-16 overflow-hidden">
+      {/* atmosphere */}
+      <div className="pointer-events-none absolute inset-0 bg-lens-glow opacity-70" />
+      <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-[size:64px_64px] opacity-20 [mask-image:radial-gradient(60%_50%_at_50%_50%,#000,transparent)]" />
+
+      <div className="relative max-w-md w-full bg-ground-card p-8 rounded-2xl border border-white/10 shadow-card">
+        {/* header */}
+        <button
+          onClick={() => navigate("/")}
+          className="text-ink-dim hover:text-ink text-xl transition mb-6 inline-flex"
+          aria-label="Go Back"
+        >
+          <IoArrowBack />
+        </button>
+
+        <h5 className="font-display text-3xl font-bold ink-gradient text-center mb-2">
+          Sign in to Samvaada
+        </h5>
+        <p className="text-center text-sm text-ink-faint mb-8">
+          Use your college account to enter the archive.
+        </p>
+
+        <div className="mb-8 space-y-3">
+          <div className="border border-white/[0.07] bg-white/[0.02] p-4 rounded-sm">
+            <p className="text-ink font-semibold text-sm">Are you a student?</p>
+            <p className="text-ink-dim text-sm mt-1">
+              Login with the account ending in{" "}
+              <span className="font-mono text-brand-glow">@nmamit.in</span>
             </p>
           </div>
-          <div className="bg-[#243E51] p-4 rounded">
-            <p className="text-[#89A3B6] font-semibold">Are you a college Faculty?</p>
-            <p className="text-[#89A3B6] text-sm">
-              Login with your college account ending with{" "}
-              <span className="font-mono">@nitte.edu.in</span>
+          <div className="border border-white/[0.07] bg-white/[0.02] p-4 rounded-sm">
+            <p className="text-ink font-semibold text-sm">Are you a Faculty member?</p>
+            <p className="text-ink-dim text-sm mt-1">
+              Login with the account ending in{" "}
+              <span className="font-mono text-brand-glow">@nitte.edu.in</span>
             </p>
           </div>
         </div>
@@ -60,13 +66,13 @@ const Login = () => {
         <button
           type="button"
           onClick={handleGoogleLogin}
-          className="btn w-full bg-white hover:bg-gray-50 text-gray-800 flex items-center justify-center gap-2"
+          className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold rounded-sm py-3 transition"
         >
           <FcGoogle className="text-2xl" />
           <span>Sign in with Google</span>
         </button>
       </div>
-      <ToastContainer />
+      <ToastContainer theme="dark" />
     </div>
   );
 };

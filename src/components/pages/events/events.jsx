@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { collection, getDocs } from "firebase/firestore";
+import { motion } from "framer-motion";
 import { db } from "../../Firebase/firebase.config";
-import NavBar from "../../shared/NavBar/NavBar";
-import Footer from "../../shared/NavBar/Footer";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import SectionHeading from "../../shared/SectionHeading";
+import EventCard from "../../shared/EventCard";
 
 const Events = () => {
+  const { user } = useContext(AuthContext);
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [academicYears, setAcademicYears] = useState([]);
@@ -45,6 +48,7 @@ const Events = () => {
     };
 
     fetchEvents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 🧩 Filter events by academic year
@@ -72,22 +76,23 @@ const Events = () => {
   };
 
   return (
-    <div className="bg-black text-[#89A3B6] min-h-screen flex flex-col">
-      <NavBar />
+    <div className="relative bg-ground text-ink min-h-screen">
+      {/* ambient glow */}
+      <div className="pointer-events-none absolute top-0 left-0 w-full h-[40rem] bg-lens-glow opacity-50" />
 
-      <div className="flex-grow px-8 py-16">
-        <h2 className="text-5xl font-bold text-center mb-10">All Events</h2>
+      <div className="relative max-w-screen-xl mx-auto px-6 md:px-8 py-20">
+        <SectionHeading kicker="The Full Archive" title="All Events" />
 
-        {/* Year Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-10">
+        {/* Year Filter */}
+        <div className="flex flex-wrap justify-center gap-2 mt-8 mb-10">
           {academicYears.map((year) => (
             <button
               key={year}
               onClick={() => filterEventsByYear(year)}
-              className={`px-4 py-2 rounded-lg transition-all duration-300 ${
+              className={`text-sm font-medium px-4 py-1.5 rounded-full border transition-all duration-300 ${
                 selectedYear === year
-                  ? "bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white"
-                  : "bg-[rgba(36,62,81,0.5)] text-[#89A3B6] hover:bg-[rgba(47,77,99,0.6)]"
+                  ? "border-brand-glow/50 bg-brand-700/40 text-ink"
+                  : "border-white/10 text-ink-dim hover:border-brand-glow/30 hover:text-ink"
               }`}
             >
               {year}
@@ -97,34 +102,21 @@ const Events = () => {
 
         {/* Events Grid */}
         {filteredEvents.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredEvents.map((event) => (
-              <div
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredEvents.map((event, i) => (
+              <motion.div
                 key={event.id}
-                className="card bg-[#243E51]/60 shadow-xl text-[#89A3B6] hover:scale-105 transition-transform duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="card-body">
-                  <h3 className="card-title text-2xl font-bold mb-4">
-                    {event.eventName}
-                  </h3>
-                  <p className="mb-4">{event.eventDescription}</p>
-                  <div className="flex justify-between items-center">
-                    <p className="text-sm text-gray-400">{event.eventDate}</p>
-                    <a
-                      href={event.eventDriveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-sm bg-gradient-to-br from-[#496980] to-[#5C7B92] text-white hover:bg-gradient-to-bl border-none"
-                    >
-                      View
-                    </a>
-                  </div>
-                </div>
-              </div>
+                <EventCard event={event} index={i} user={user} />
+              </motion.div>
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-400 mt-10">
+          <p className="text-center text-ink-faint py-16">
             No events found for {selectedYear || "this year"}.
           </p>
         )}
@@ -132,4 +124,5 @@ const Events = () => {
     </div>
   );
 };
+
 export default Events;
