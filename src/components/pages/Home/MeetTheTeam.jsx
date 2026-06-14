@@ -155,7 +155,7 @@ const MeetTheTeam = () => {
   const visible = visibleIndices.map((i) => allImages[i % allImages.length]);
 
   return (
-    <div className="w-full max-w-screen-2xl mx-auto my-8 px-2 md:px-8">
+    <div className="w-full max-w-screen-2xl mx-auto flex flex-col mt-8 mb-4 px-2 md:px-8 h-[80vh]">
       <div className="flex flex-col items-center gap-2.5 mb-6 py-2">
         <span className="cam-label !text-[0.7rem] text-brand-glow/90">Through Our Lens</span>
         <h3 className="font-display text-3xl sm:text-4xl md:text-[2.75rem] font-bold ink-gradient">
@@ -170,28 +170,24 @@ const MeetTheTeam = () => {
         </div>
       )}
 
-      {/* Balanced photo mosaic — all 7 slots fill the grid evenly */}
-      <div className="grid grid-flow-row-dense grid-cols-2 auto-rows-[30vw] sm:auto-rows-[22vw] gap-2 md:grid-cols-6 md:grid-rows-4 md:auto-rows-auto md:h-[70vh] md:gap-4">
-        <ImageGridItem className="col-span-2 row-span-2 md:col-span-2 md:row-span-2" src={visible[0]} />
-        <ImageGridItem className="col-span-1 row-span-2 md:col-span-2 md:row-span-1" src={visible[1]} />
-        <ImageGridItem className="col-span-1 row-span-2 md:col-span-2 md:row-span-2" src={visible[2]} />
-        <ImageGridItem className="col-span-2 row-span-1 md:col-span-2 md:row-span-1" src={visible[3]} />
-        <ImageGridItem className="col-span-1 row-span-2 md:col-span-2 md:row-span-2" src={visible[4]} />
-        <ImageGridItem className="col-span-1 row-span-2 md:col-span-2 md:row-span-2" src={visible[5]} />
-        <ImageGridItem className="col-span-2 row-span-2 md:col-span-2 md:row-span-2" src={visible[6]} />
-      </div>
+      {/* Varied photo grid with a full-width, centered tagline row at the bottom */}
+      <div className="flex-1 grid grid-cols-2 grid-rows-8 gap-2 md:grid-cols-6 md:grid-rows-4 md:gap-4 h-full mx-2 md:mx-8">
+        <ImageGridItem className="col-span-2 row-span-2 md:col-span-3 md:row-span-2" src={visible[0]} />
+        <ImageGridItem className="col-span-1 row-span-1 md:col-span-2 md:row-span-1" src={visible[1]} />
+        <ImageGridItem className="col-span-1 row-span-1 md:col-span-1 md:row-span-1" src={visible[2]} />
+        <ImageGridItem className="col-span-2 row-span-1 md:col-start-4 md:col-span-3 md:row-start-2 md:row-span-1" src={visible[3]} />
+        <ImageGridItem className="col-span-1 row-span-2 md:col-span-2 md:row-span-1" src={visible[4]} />
+        <ImageGridItem className="col-span-1 row-span-1 md:col-span-2 md:row-span-1" src={visible[5]} />
+        <ImageGridItem className="col-span-2 row-span-1 md:col-span-2 md:row-span-1" src={visible[6]} />
 
-      {/* Tagline caption */}
-      <div className="flex justify-center mt-10 mb-2">
-        <span
-          className="font-display ink-gradient text-3xl sm:text-5xl md:text-6xl font-extrabold text-center px-2"
-          style={{
-            letterSpacing: "0.28em",
-            textShadow: "0 0 30px rgba(134,174,203,0.25)",
-          }}
-        >
-          SMC FOR A REASON
-        </span>
+        <div className="col-span-2 row-span-1 flex items-center justify-center md:col-span-6 md:row-start-4 overflow-hidden">
+          <span
+            className="font-display ink-gradient font-extrabold text-center w-full whitespace-nowrap tracking-[0.12em] sm:tracking-[0.22em] md:tracking-[0.3em] text-[clamp(1rem,5.5vw,3.75rem)]"
+            style={{ textShadow: "0 0 30px rgba(134,174,203,0.25)" }}
+          >
+            SMC FOR A REASON
+          </span>
+        </div>
       </div>
     </div>
   );
