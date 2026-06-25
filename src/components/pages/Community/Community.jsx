@@ -32,7 +32,7 @@ export default function Community() {
   };
 
   return (
-    <div className="min-h-screen py-24 px-4 flex flex-col items-center justify-center relative overflow-hidden">
+    <div className="py-24 px-4 flex flex-col items-center relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 bg-grid-faint -z-10" />
       <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-brand-glow/10 blur-[120px] rounded-full pointer-events-none" />
@@ -100,7 +100,7 @@ export default function Community() {
             <h2 className="text-xl sm:text-2xl font-display font-bold text-white mb-3 sm:mb-4">Welcome to NMAMIT Community</h2>
             
             <p className="text-sm sm:text-base text-ink-dim mb-6 sm:mb-8 leading-relaxed">
-              This is the place where you will get all the information about all the activities that are going in and around the college. Connect, collaborate, and grow with your peers in <span className="font-semibold text-brand-glow block mt-1">{branch}</span>
+              This is the place where you will get all the information about all the activities that are going in and around the college. Join our community, stay connected, and <span className="font-semibold text-brand-glow block mt-1">Never miss any update</span>
             </p>
 
             <a 
